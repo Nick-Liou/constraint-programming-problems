@@ -1,0 +1,9 @@
+ntrucks = 3;
+max_truck_weight = [15,20,30];
+speed = [10,20,5] ;
+
+% Number of deliveries and the associated set
+ndeliveries = 5;
+weight = [5,10,18,22,10];
+ready_after = [0,0,3,2,1];
+distance = [40,100,60,80,120];

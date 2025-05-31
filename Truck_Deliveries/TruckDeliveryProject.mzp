@@ -1,0 +1,20 @@
+{
+    "openFiles": [
+        "truck_delivery.mzn",
+        "delivery_trucks0.dzn",
+        "delivery_trucks1.dzn",
+        "delivery_trucks3.dzn",
+        "delivery_trucks4.dzn"
+    ],
+    "openTab": 4,
+    "projectFiles": [
+        "delivery_trucks0.dzn",
+        "delivery_trucks1.dzn",
+        "delivery_trucks3.dzn",
+        "delivery_trucks4.dzn",
+        "truck_delivery.mzn"
+    ],
+    "selectedBuiltinConfigId": "org.gecode.gecode",
+    "selectedBuiltinConfigVersion": "6.3.0",
+    "version": 106
+}

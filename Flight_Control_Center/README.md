@@ -62,7 +62,12 @@ work = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9];
 gap=0;
 ```
 
+### FSM-Based Solution Approach
 
-![FSM for the Flight Control Center.](Flight Control Center 2.png)
+To enforce the rule that controllers must take a day off after accumulating 4 points from shifts, the sequence of accepted shifts is modeled using a finite state machine (FSM). This FSM tracks the cumulative points in total and forces an "off" transitions once the 4-point threshold is reached.
+The behavior is implemented in MiniZinc using the **regular** constraint, which ensures that each controller's weekly shift sequence conforms to the FSM.
+
+![FSM for the Flight Control Center.](FSM_FCC.png)
+
 
 

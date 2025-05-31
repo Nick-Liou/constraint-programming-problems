@@ -63,6 +63,6 @@ gap=0;
 ```
 
 
-
+![FSM for the Flight Control Center.](Flight Control Center 2.png)
 
 

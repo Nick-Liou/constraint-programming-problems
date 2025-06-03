@@ -1,0 +1,16 @@
+{
+    "openFiles": [
+        "air_traffic_control_center.mzn",
+        "air_traffic0.dzn",
+        "air_traffic1.dzn"
+    ],
+    "openTab": 0,
+    "projectFiles": [
+        "air_traffic0.dzn",
+        "air_traffic1.dzn",
+        "air_traffic_control_center.mzn",
+        "multithreaded.mpc"
+    ],
+    "selectedSolverConfigFile": "multithreaded.mpc",
+    "version": 106
+}

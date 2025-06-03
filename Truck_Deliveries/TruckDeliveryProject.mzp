@@ -6,15 +6,15 @@
         "delivery_trucks3.dzn",
         "delivery_trucks4.dzn"
     ],
-    "openTab": 4,
+    "openTab": 0,
     "projectFiles": [
         "delivery_trucks0.dzn",
         "delivery_trucks1.dzn",
         "delivery_trucks3.dzn",
         "delivery_trucks4.dzn",
+        "multithreaded.mpc",
         "truck_delivery.mzn"
     ],
-    "selectedBuiltinConfigId": "org.gecode.gecode",
-    "selectedBuiltinConfigVersion": "6.3.0",
+    "selectedSolverConfigFile": "multithreaded.mpc",
     "version": 106
 }

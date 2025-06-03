@@ -1,0 +1,6 @@
+{
+    "intermediate-solutions": true,
+    "output-objective": true,
+    "parallel": 2,
+    "solver": "cp-sat@9.12.4544"
+}

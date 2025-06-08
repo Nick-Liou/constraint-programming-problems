@@ -1,0 +1,22 @@
+{
+    "openFiles": [
+        "serverAlloc.mzn",
+        "server_set0.dzn",
+        "server_set1.dzn",
+        "server_set2.dzn",
+        "server_set3.dzn",
+        "server_set4.dzn"
+    ],
+    "openTab": 0,
+    "projectFiles": [
+        "multithreded.mpc",
+        "serverAlloc.mzn",
+        "server_set0.dzn",
+        "server_set1.dzn",
+        "server_set2.dzn",
+        "server_set3.dzn",
+        "server_set4.dzn"
+    ],
+    "selectedSolverConfigFile": "multithreded.mpc",
+    "version": 106
+}

@@ -16,7 +16,6 @@ array[DELIVERIES] of int: distance;
 %% Setting Time to a constant range
 set of int: TIME = 0..1000;
 
-%%% Build Your Model here
 par int: ndrivers = 2 ; 
 
 array[DELIVERIES] of var TIME: depart ;        % Time at which delivery of each box begins
@@ -59,7 +58,7 @@ constraint forall (i in DELIVERIES, t in TRUCKS)
 var TIME: makespan = max(end) ;
 solve minimize makespan ; 
 
-%%% DO NOT CHANGE THE FOLLOWING LINES
+
 output [" depart = \(depart); \n delivery_time = \(delivery_time); \n"] ++
        [" onTruck = \(onTruck); \n makespan = \(makespan);"];
 

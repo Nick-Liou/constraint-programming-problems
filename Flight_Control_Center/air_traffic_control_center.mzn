@@ -6,12 +6,12 @@ int : air_t_controllers ;
 set of int: CONTROLLERS = 1..air_t_controllers;
 set of int: DAYS = 1..7;
 
-%% Some Decision Vars (You can add more)
+%% Some Decision Vars 
 array[CONTROLLERS,DAYS] of var CONTROL_SHIFT: roster;
 array[CONTROLLERS] of var int: work;
 var 0..4*7: gap;
 
-%%%%% Add your model here
+
 int: ns = 5;
 set of int : STATE = 1..ns;
 array[STATE,CONTROL_SHIFT] of int: allowed = 
@@ -34,6 +34,7 @@ constraint forall(i in CONTROLLERS)(count_leq([roster[i,d] | d in DAYS], NIGHT  
 constraint forall(d in DAYS)(count_leq([roster[i,d] | i in CONTROLLERS], MORNING  , 3));
 constraint forall(d in DAYS)(count_leq([roster[i,d] | i in CONTROLLERS], AFTERNOON, 2));
 constraint forall(d in DAYS)(count_leq([roster[i,d] | i in CONTROLLERS], NIGHT    , 1));
+% Alternative way to write the same thing
 % constraint forall(d in DAYS)(count_leq( col(roster,d), MORNING , 3));
 % constraint forall(d in DAYS)(sum([roster[i,d] == MORNING   | i in CONTROLLERS]) >= 3);
 % constraint forall(d in DAYS)(sum([roster[i,d] == AFTERNOON | i in CONTROLLERS]) >= 2);
@@ -47,11 +48,10 @@ work[i] = 1*sum([ roster[i,d] == MORNING   | d in DAYS]) +
 ) ;
 
 
-constraint gap = 1 ; % Part B (Note a gap of 0 can also be achieved)
+
 constraint gap = max(work) - min(work) ; 
 solve minimize gap;
       
-%%% DO NOT CHANGE THE FOLLWOING LINES
 
 output ["% Just for debugging. The table of shifts.\n%"]
        ++ [format(10,D) | D in DAYS ] ++ ["\n% "] 

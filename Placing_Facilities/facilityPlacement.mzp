@@ -1,0 +1,22 @@
+{
+    "openFiles": [
+        "placingFacilities.mzn",
+        "locs0.dzn",
+        "locs1.dzn",
+        "locs2.dzn",
+        "locs3.dzn",
+        "locs4.dzn"
+    ],
+    "openTab": 0,
+    "projectFiles": [
+        "locs0.dzn",
+        "locs1.dzn",
+        "locs2.dzn",
+        "locs3.dzn",
+        "locs4.dzn",
+        "multithreaded.mpc",
+        "placingFacilities.mzn"
+    ],
+    "selectedSolverConfigFile": "multithreaded.mpc",
+    "version": 106
+}

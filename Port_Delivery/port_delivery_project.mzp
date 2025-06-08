@@ -1,0 +1,18 @@
+{
+    "openFiles": [
+        "port_delivery.mzn",
+        "port0.dzn",
+        "port1.dzn",
+        "port2.dzn"
+    ],
+    "openTab": 0,
+    "projectFiles": [
+        "port0.dzn",
+        "port1.dzn",
+        "port2.dzn",
+        "port_delivery.mzn"
+    ],
+    "selectedBuiltinConfigId": "org.gecode.gecode",
+    "selectedBuiltinConfigVersion": "6.3.0",
+    "version": 106
+}

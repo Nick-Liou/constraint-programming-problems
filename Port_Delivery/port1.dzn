@@ -1,0 +1,13 @@
+num_derricks = 3;
+num_trucks = 8;
+max_time = 100;
+
+delivery = [|5,enum2int(wh1)
+            |2,enum2int(wh2)
+            |3,enum2int(wh1)
+            |4,enum2int(wh2) 
+            |5,enum2int(wh2)
+            |6,enum2int(wh2)
+            |6,enum2int(wh1)
+            |7,enum2int(wh2) 
+          |];

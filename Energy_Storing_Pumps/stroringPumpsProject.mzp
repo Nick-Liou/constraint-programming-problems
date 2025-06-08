@@ -1,0 +1,22 @@
+{
+    "openFiles": [
+        "pumps.mzn",
+        "pump0.dzn",
+        "pump1.dzn",
+        "pump2.dzn",
+        "pump3.dzn",
+        "pump4.dzn"
+    ],
+    "openTab": 0,
+    "projectFiles": [
+        "multithreaded.mpc",
+        "pump0.dzn",
+        "pump1.dzn",
+        "pump2.dzn",
+        "pump3.dzn",
+        "pump4.dzn",
+        "pumps.mzn"
+    ],
+    "selectedSolverConfigFile": "multithreaded.mpc",
+    "version": 106
+}

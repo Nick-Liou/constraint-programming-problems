@@ -1,0 +1,5 @@
+
+nBatteries = 8;
+bat_capacity = [100,150,120,130,160,200,120,40];
+max_discharge = [20,10,20,30,30,20,10,15];
+min_discharge = [5,2,7,5,5,1,2,7];

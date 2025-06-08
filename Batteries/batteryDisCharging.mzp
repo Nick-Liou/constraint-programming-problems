@@ -1,0 +1,18 @@
+{
+    "openFiles": [
+        "battery.mzn",
+        "bat_data1.dzn",
+        "bat_data2.dzn",
+        "bat_data3.dzn"
+    ],
+    "openTab": 0,
+    "projectFiles": [
+        "bat_data1.dzn",
+        "bat_data2.dzn",
+        "bat_data3.dzn",
+        "battery.mzn"
+    ],
+    "selectedBuiltinConfigId": "org.gecode.gecode",
+    "selectedBuiltinConfigVersion": "6.3.0",
+    "version": 106
+}

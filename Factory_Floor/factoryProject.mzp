@@ -1,0 +1,20 @@
+{
+    "openFiles": [
+        "factory.mzn",
+        "factory_data1.dzn",
+        "factory_data2.dzn",
+        "factory_data3.dzn",
+        "factory_data4.dzn"
+    ],
+    "openTab": 0,
+    "projectFiles": [
+        "factory.mzn",
+        "factory_data1.dzn",
+        "factory_data2.dzn",
+        "factory_data3.dzn",
+        "factory_data4.dzn",
+        "mutlithreaded.mpc"
+    ],
+    "selectedSolverConfigFile": "mutlithreaded.mpc",
+    "version": 106
+}

@@ -1,0 +1,5 @@
+
+nBatteries = 3;
+bat_capacity = [100,150,120];
+max_discharge = [20,10,20];
+min_discharge = [5,2,7];

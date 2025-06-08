@@ -29,14 +29,14 @@ array[DELIVERIES,TRUCKS] of var     TIME: delivery_time_alt ;
 
 constraint forall (i in DELIVERIES) 
 (alternative(depart[i],delivery_time[i],
-[depart_alt[i,t]        | t in TRUCKS where  weight[i] <= max_truck_weight[t]],
-[delivery_time_alt[i,t] | t in TRUCKS where  weight[i] <= max_truck_weight[t]])
+[depart_alt[i,t]        | t in TRUCKS ], 
+[delivery_time_alt[i,t] | t in TRUCKS ]) 
 );
 
 % Exluding alternatives that are invalid by definition (data)
 constraint forall (i in DELIVERIES, t in TRUCKS) (
 if weight[i] <= max_truck_weight[t]
-then delivery_time_alt[i,t] = distance[i] / speed[t]
+then delivery_time_alt[i,t] = distance[i] div speed[t]
 else (depart_alt[i,t] = <>  /\ delivery_time_alt[i,t] = 0 )
 endif );
 

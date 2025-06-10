@@ -14,13 +14,13 @@ var 0..4*7: gap;
 
 int: ns = 5;
 set of int : STATE = 1..ns;
-array[STATE,CONTROL_SHIFT] of int: allowed = 
+array[STATE,CONTROL_SHIFT] of opt STATE: allowed = 
 %   MORNING  AFTERNOON   NIGHT    OFF
-[|    2,        3,         0,       5
- |    3,        4,         0,       5
- |    4,        0,         0,       5
- |    0,        0,         0,       5
- |    1,        2,         4,       5 |];
+[|    2,        3,        <>,      5
+ |    3,        4,        <>,      5
+ |    4,       <>,        <>,      5
+ |   <>,       <>,        <>,      5
+ |    1,        2,         4,      5 |];
 
 constraint forall (i in CONTROLLERS)
 (regular( enum2int( row(roster,i)) , allowed, 5, STATE ));

@@ -1,0 +1,16 @@
+{
+    "openFiles": [
+        "battery_conditioning.mzn",
+        "bat1.dzn",
+        "bat2.dzn"
+    ],
+    "openTab": 0,
+    "projectFiles": [
+        "bat1.dzn",
+        "bat2.dzn",
+        "battery_conditioning.mzn",
+        "multithreaded.mpc"
+    ],
+    "selectedSolverConfigFile": "multithreaded.mpc",
+    "version": 106
+}

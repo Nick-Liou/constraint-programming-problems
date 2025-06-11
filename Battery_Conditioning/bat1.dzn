@@ -1,0 +1,9 @@
+num_batteries = 4;
+bat_capacity = [30,10,70,40];
+
+num_dischargers = 2;
+current = [5,10];
+
+charger_max_active_ports = 3;
+charger_max_total_current = 30;
+ 

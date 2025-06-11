@@ -58,7 +58,7 @@ Each problem directory contains:
 - `model.mzn`: The MiniZinc model.
 - `data.dzn`: The data file for the problem instance.
 - `README.md` : Brief explanation specific to the problem.
-- `solver_config.mpc`: Solver configuration to optimize solution time.
+- `solver_config.mpc`: (optional) Solver configuration to optimize solution time.
 
 ## How to Run
 

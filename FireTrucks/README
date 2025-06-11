@@ -1,0 +1,61 @@
+## Problem Overview: FireTrucks Scheduling
+
+In this problem, we are tasked with scheduling the **refueling and servicing** of a fleet of firetrucks at a fire station.
+
+There are:
+- **3 water hydrants**, each capable of refilling water at a rate of **50 kg/minute**,
+- **1 mobile service unit**, which can inspect/maintain one firetruck at a time.
+
+Each **firetruck** must:
+1. **Be refilled with water** (the duration depends on the truck's water capacity),
+2. **Undergo service** by the mobile service unit (duration is truck-specific).
+
+The goal is to **schedule both operations** for each truck such that:
+- Resource constraints (hydrants and service unit) are respected,
+- The **makespan** (total time until the last truck is done) is **minimized**,
+- We also track the **total active time** of the service unit (from start of the first service to end of last).
+
+### Input Example
+
+```minizinc
+no_firetrucks = 6;
+water_cap = [1200, 900, 1500, 800, 1300, 600];     % Water capacity per truck (kg)
+service_time = [15, 10, 20, 10, 5, 20];            % Time needed by the mobile unit per truck (min)
+```
+
+### Constants
+```minizinc
+hydrants = 3;                   % Number of water hydrants
+refill_rate = 50;               % Each hydrant can refill 50 kg/min
+```
+
+### Output Variables
+
+- `start_fill[i]`: time when firetruck `i` starts refueling
+- `start_service[i]`: time when firetruck `i` starts service
+- `makespan`: total time of the schedule (when last operation ends)
+- `total_service`: time interval from the start of the first service to the end of the last (excluding idle gaps is not needed)
+
+### Output Example (Optimal)
+```minizinc
+start_fill=[0, 30, 0, 24, 12, 0];
+start_service=[52, 82, 32, 67, 77, 12];
+total_service = 80;
+makespan=92;
+```
+
+This means:
+-  Truck 1 starts refueling at time 0, and service at time 52.
+-  Truck 2 starts refueling at time 30, and service at time 82.
+-  total_service = 80 minutes: from first service at 12 to last service ending at 92.
+-  The makespan of the entire schedule is 92 minutes.
+
+
+### Constraints
+-  No hydrant can refill more than one truck at the same time.
+-  The mobile unit can only service one truck at a time.
+-  Service for a truck can only start after its refueling is finished.
+
+### Objective
+
+Minimize the `makespan`

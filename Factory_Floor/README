@@ -1,0 +1,75 @@
+## Problem Overview: Factory Floor Scheduling
+
+In a factory, production is organized into **stages**, and each stage can be handled by one of several **machines**. Each **order** must pass **sequentially** through all stages. Machines differ in **speed**, meaning each order may take a different amount of time depending on which machine it is assigned to.
+
+The aim is to:
+- Assign each order to **one machine per stage**,
+- Schedule start times for each task (order × stage),
+- Respect machine availability (no overlapping tasks),
+- Obey **machine transfer constraints**,
+- **Minimize the total tardiness** (lateness beyond the deadline for each order).
+
+---
+
+### Input Parameters
+
+#### Sets
+```minizinc
+MACHINES = {m1, m2, m3, m4, m5, m6, m7, m8, m9};  % All available machines
+no_stages = 3;                                    % Number of stages
+stage_machines = [
+    {m1, m2, m3},   % Stage 1
+    {m4, m5, m6},   % Stage 2
+    {m7, m8, m9}    % Stage 3
+];
+```
+
+#### Machine Properties
+
+```minizinc
+unit_speed_factor = array1d(MACHINES, [1, 3, 2, 4, 5, 4, 3, 4, 2]);
+```
+This means: m1 completes 1 unit per time unit; m2 takes 3 time units per unit, etc.
+
+#### Orders
+
+```minizinc
+no_orders = 3;
+order_size = [4, 6, 3];     % Order i requires order_size[i] units
+deadline = [10, 30, 15];    % Deadline for each order
+```
+### Machine Transfer Constraints
+
+Some machine pairs cannot be used together across adjacent stages:
+```minizinc
+no_excludes = 3;
+excludes = [
+    |m1, m5|,
+    |m2, m6|,
+    |m4, m8|
+];
+```
+For example, if order 1 is processed on m1 in stage 1, it cannot be assigned to m5 in stage 2.
+
+### Objective
+
+Minimize the total cost, where for each order:
+```minizinc
+cost = sum(i in 1..no_orders)(
+  max(0, completion_time[i] - deadline[i])
+)
+```
+
+### Example Output (Optimal)
+```minizinc
+job_machines = [m1, m4, m9, m1, m6, m9, m1, m6, m9]; 
+job_start = [3, 7, 23, 9, 15, 39, 0, 3, 15]; 
+job_duration=[4, 16, 8, 6, 24, 12, 3, 12, 6];
+cost = 48;
+```
+This means:
+-  Order 1 uses machines m1 (stage 1), m4 (stage 2), m9 (stage 3)
+-  Starts at 3, 7, and 23 respectively, takes 4, 16, and 8 units of time
+-  Final completion time is 31 → Tardiness = 31 - 10 = 21
+-  Total tardiness over all orders = 48
+

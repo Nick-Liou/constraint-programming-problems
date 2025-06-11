@@ -68,7 +68,7 @@ constraint forall (i in BATTERIES , c in DISCHARGERS) (
   endif
 );
 
-%%% Redundant but safe constraint to bound discharger use
+%%% Constraint to bound discharger use
 constraint cumulative(startDischarge, durationDischarge, [1 | i in BATTERIES], num_dischargers);
 
 %%% Define end of discharging

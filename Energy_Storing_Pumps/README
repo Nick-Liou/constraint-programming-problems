@@ -1,0 +1,67 @@
+## Problem Overview: Energy Storing Pumps Scheduling
+
+In a hydroelectric energy storage station, **nPumps** transfer water from a low to a high reservoir using **excess renewable energy**. Each pump can be in one of three modes:
+
+- `OFF`: Pump is not operating.
+- `P050`: Operating at 50% capacity.
+- `P100`: Operating at 100% capacity.
+
+Each pump:
+<!-- - **Consumes energy** depending on its mode. -->
+- **Contributes to storing energy** (depending on its mode).
+- Must go `OFF` for **at least 1 day** of **maintenance** after **accumulating 200% capacity** (e.g., 2 × `P100` or 4 × `P050` or any mix summing to 200%).
+
+### Goal
+
+Design a **daily schedule** for each pump over `nDays`, choosing for each day one of the three states: `OFF`, `P050`, or `P100`.  
+**Objective**: Minimize the **total energy lost** (i.e., energy available but not absorbed).
+
+---
+
+### Input Example
+
+```minizinc
+nDays = 10;
+nPumps = 3;
+
+% Pump capacity per mode [P050, P100, OFF]
+consumption = [
+  |20, 35, 0|     % Pump 1
+  |10, 15, 0|     % Pump 2
+  |5,  15, 0|     % Pump 3
+];
+
+% Available energy to store each day
+energy2store = [45, 25, 20, 10, 10, 40, 20, 10, 10, 30];
+```
+
+### Output Variables
+`schedule`: Array (`nPumps` × `nDays`) of mode values (`OFF`, `P050`, `P100`) for each pump and day.
+
+`lost`: Total unused energy (excess not absorbed due to capacity/mode constraints).
+
+### Example Output
+
+```minizinc
+% Just for debugging. The table of pump operations.
+%    1    2    3    4    5    6    7    8    9   10
+%  P050 P050 P050  OFF  OFF P050 P050  OFF  OFF  OFF
+%  P050  OFF  OFF P050 P050 P100  OFF P050 P050 P100
+%  P100 P050  OFF  OFF  OFF P050  OFF  OFF  OFF P100
+% % Raw Data in Tables ------------ 
+schedule=[P050, P050, P050, OFF, OFF, P050, P050, OFF, OFF, OFF, P050, OFF, OFF, P050, P050, P100, OFF, P050, P050, P100, P100, P050, OFF, OFF, OFF, P050, OFF, OFF, OFF, P100];
+lost= 0;
+```
+
+### Constraints
+
+  -  Pump Operation Limits:
+      - Track cumulative operation level over consecutive days.
+      - If a pump reaches or exceeds 200% total effort, must be OFF the next day.
+      - Any OFF day resets the accumulated usage to 0.
+  -  Energy Usage Limit:
+      -  On any given day, the total energy consumed across all pumps must not exceed `energy2store[day]`.
+      -  If pump demand > available energy → energy is lost.
+   - Mode Logic:
+      - Only valid transitions: OFF → P050/P100 or stay in same mode.
+      - Can go to OFF any time.

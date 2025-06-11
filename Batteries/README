@@ -1,0 +1,63 @@
+## Problem Overview: Pass me that power
+
+We are given a set of **batteries** connected to the electric grid via a **shared cable**. The goal is to determine a discharge schedule that minimizes the **total discharge time**, under several **capacity and constraint limitations**.
+
+### Problem Description
+
+Each battery:
+- Has a fixed **capacity** in ampere-hours (Ah),
+- Has a **minimum** and **maximum** allowed **discharge rate** in amperes (A),
+- Once **discharging starts**, it cannot be interrupted,
+- Discharges at a **constant rate**.
+
+The **shared cable** has these limitations:
+- It can handle at most **40A** total at any given moment,
+- A maximum of **2 batteries** can be discharging **simultaneously**.
+
+The task is to:
+- Decide **when** to start discharging each battery,
+- Choose a **discharge rate** (within limits) for each battery,
+- Ensure all constraints are satisfied,
+- **Minimize** the **total discharge duration** (i.e., time when the last battery finishes).
+
+### Input Example
+
+```minizinc
+nBatteries = 3;
+
+bat_capacity = [100, 150, 120];       % Capacity in Ah
+max_discharge = [20, 10, 20];         % Max discharge rate in A
+min_discharge = [5, 2, 7];            % Min discharge rate in A
+```
+
+
+### Output Variables
+-  `start[i]`: time when battery `i` starts discharging
+-  `discharge_rate[i]`: selected discharge current for battery `i` (within bounds)
+-  `duration[i]`: how long battery `i` discharges (based on rate)
+-  `discharge_ends`: time when the **last** battery finishes discharging
+
+### Example Output (Optimal)
+
+```minizinc
+start = [6, 0, 0]; 
+duration = [5, 15, 6]; 
+discharge_rate = [20, 10, 20]; 
+discharge_ends = 15;
+```
+
+### Interpretation:
+- Battery 1: starts at time 6, discharges at 20A for 5 - minutes (100 Ah)
+- Battery 2: starts at time 0, discharges at 10A for 15 - minutes (150 Ah)
+- Battery 3: starts at time 0, discharges at 20A for 6 - minutes (120 Ah)
+- Overall discharge ends at time 15
+
+
+### Constraints Summary
+
+-  `min_discharge[i] ≤ discharge_rate[i] ≤ max_discharge[i]`
+-  At any moment:
+    - At most 2 batteries are discharging
+    - Total current ≤ 40A
+-   Battery discharging is non-preemptive
+-   Start times and discharge rates should be optimized to **minimize `discharge_ends`**

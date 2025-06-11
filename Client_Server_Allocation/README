@@ -1,0 +1,65 @@
+## Problem Overview: Client/Server Allocation
+
+This problem focuses on the optimal allocation of services requested by clients to edge servers in a distributed system. Each client requests exactly one service, and every service consumes a specific amount of **network resources**. Depending on which server the service is deployed on, the **networking cost** varies. Additionally, each server has a limited **capacity**, and if used, incurs a fixed **deployment cost**.
+
+The objective is to **minimize the total cost**, which includes:
+- The **deployment costs** of all active servers (i.e., servers assigned at least one service),
+- The **networking costs**, which depend on the client demands and their assigned server.
+
+### Problem Description
+
+- Each **client** requests one service with a defined **resource demand**.
+- Each **server** has:
+  - A fixed **capacity** (maximum total demand it can support),
+  - A fixed **deployment cost** (incurred only if at least one service is assigned to it).
+- The **networking cost per unit** of resource differs by service and server. 
+    - The total networking cost of a task is computed as: `NetworkingCost[client, server] * ClientDemands[client]`
+- Each service must be assigned to exactly **one server**.
+- A server cannot exceed its total capacity.
+
+### Input Example
+
+```minizinc
+Servers = 4;                             % Number of servers
+Clients = 6;                             % Number of clients (one service per client)
+
+Capacity = [30, 40, 60, 60];                % Capacity of each server
+DeploymentCost = [860, 350, 440, 580];      % Fixed cost per active server
+ClientDemands = [12, 17, 5, 13, 20, 25];    % Demand per client
+
+NetworkingCost = [
+    |27, 66, 44, 55
+    |53, 89, 68, 46
+    |17, 40, 18, 61
+    |20, 68, 44, 78
+    |42, 89, 65, 78 
+    |57, 55, 49, 31|];  % Cost per unit demand per server
+```
+
+### Output Example (Optimal Allocation)
+```minizinc
+client_allocation = [
+  [0, 0, 12, 0]     % Client 1 assigned to server 3 (12 units)
+  [0, 0, 0, 17]     % Client 2 assigned to server 4 (17 units)
+  [0, 0, 5,  0]     % Client 3 assigned to server 3 (5 units)
+  [0, 0, 13, 0]     % Client 4 assigned to server 3 (13 units)
+  [0, 0, 20, 0]     % Client 5 assigned to server 3 (20 units)
+  [0, 0, 0, 25]     % Client 6 assigned to server 4 (25 units)
+];
+client_allocation = [0, 0, 12, 0, 0, 0, 0, 17, 0, 0, 5, 0, 0, 0, 13, 0, 0, 0, 20, 0, 0, 0, 0, 25]; 
+total_cost = 5067;
+```
+
+This means:
+-  Servers 3, and 4 are active, and their deployment costs are included.
+-  The `total_cost` is the sum of all **deployment costs** for active servers and **networking costs** for all services.
+
+
+
+### Objective
+
+Minimize the total cost, defined as:
+
+```minizinc
+total_cost = sum_of_networking_costs + sum_of_deployment_costs;
+```
